@@ -86,7 +86,8 @@ class WriteJournalDaoImplSpec
           SequenceNumber(1L),
           deleted = false,
           Array(1.toByte, 2.toByte, 3.toByte),
-          Long.MaxValue
+          Long.MaxValue,
+          System.currentTimeMillis()
         )
       }
       val result = writeJournalDao.putMessages(journalRows).runWith(Sink.head).futureValue
@@ -101,7 +102,8 @@ class WriteJournalDaoImplSpec
           SequenceNumber(n),
           deleted = false,
           Array(1.toByte, 2.toByte, 3.toByte),
-          Long.MaxValue
+          Long.MaxValue,
+          System.currentTimeMillis()
         )
       }
       val result = writeJournalDao.putMessages(journalRows).runWith(Sink.head).futureValue
@@ -131,7 +133,8 @@ class WriteJournalDaoImplSpec
           SequenceNumber(n),
           deleted = false,
           Array(1.toByte, 2.toByte, 3.toByte),
-          Long.MaxValue
+          Long.MaxValue,
+          System.currentTimeMillis()
         )
       }
       val result = writeJournalDao.putMessages(journalRows).runWith(Sink.head).futureValue
@@ -155,7 +158,8 @@ class WriteJournalDaoImplSpec
           SequenceNumber(n),
           deleted = false,
           Array(1.toByte, 2.toByte, 3.toByte),
-          Long.MaxValue
+          Long.MaxValue,
+          System.currentTimeMillis()
         )
       }
       val result = writeJournalDao.putMessages(journalRows).runWith(Sink.head).futureValue

@@ -180,6 +180,12 @@ class WriteJournalDaoImpl(
                 .action(AttributeAction.PUT).value(
                   AttributeValue.builder().n(journalRow.ordering.toString).build()
                 ).build(),
+              columnsDefConfig.timestampColumnName ->
+              AttributeValueUpdate
+                .builder()
+                .action(AttributeAction.PUT).value(
+                  AttributeValue.builder().n(journalRow.timestamp.toString).build()
+                ).build(),
               columnsDefConfig.deletedColumnName -> AttributeValueUpdate
                 .builder()
                 .action(AttributeAction.PUT).value(
@@ -734,6 +740,9 @@ class WriteJournalDaoImpl(
                   columnsDefConfig.orderingColumnName -> AttributeValue
                     .builder()
                     .n(journalRow.ordering.toString).build(),
+                  columnsDefConfig.timestampColumnName -> AttributeValue
+                    .builder()
+                    .n(journalRow.timestamp.toString).build(),
                   columnsDefConfig.deletedColumnName -> AttributeValue
                     .builder().bool(journalRow.deleted).build(),
                   columnsDefConfig.messageColumnName -> AttributeValue
@@ -827,6 +836,9 @@ class WriteJournalDaoImpl(
                             columnsDefConfig.orderingColumnName -> AttributeValue
                               .builder()
                               .n(journalRow.ordering.toString).build(),
+                            columnsDefConfig.timestampColumnName -> AttributeValue
+                              .builder()
+                              .n(journalRow.timestamp.toString).build(),
                             columnsDefConfig.deletedColumnName -> AttributeValue
                               .builder().bool(journalRow.deleted).build(),
                             columnsDefConfig.messageColumnName -> AttributeValue

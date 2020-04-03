@@ -166,6 +166,7 @@ trait DaoSupport {
       deleted = map(columnsDefConfig.deletedColumnName).bool.get,
       message = map.get(columnsDefConfig.messageColumnName).map(_.b.asByteArray()).get,
       ordering = map(columnsDefConfig.orderingColumnName).n.toLong,
+      timestamp = map.get(columnsDefConfig.timestampColumnName).map(_.n.toLong).getOrElse(0),
       tags = map.get(columnsDefConfig.tagsColumnName).map(_.s)
     )
   }

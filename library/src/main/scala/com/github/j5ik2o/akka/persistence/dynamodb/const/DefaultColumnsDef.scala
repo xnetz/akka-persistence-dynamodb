@@ -19,6 +19,7 @@ object DefaultColumnsDef {
 
   val PartitionKey            = "pkey"
   val OrderingColumnName      = "ordering"
+  val TimestampColumnName     = "timestamp"
   val DeletedColumnName       = "deleted"
   val MessageColumnName       = "message"
   val PersistenceIdColumnName = "persistence-id"

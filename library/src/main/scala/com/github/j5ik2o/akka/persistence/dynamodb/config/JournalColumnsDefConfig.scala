@@ -30,6 +30,7 @@ object JournalColumnsDefConfig {
       deletedColumnName = config.asString("deleted-column-name", DefaultColumnsDef.DeletedColumnName),
       messageColumnName = config.asString("message-column-name", DefaultColumnsDef.MessageColumnName),
       orderingColumnName = config.asString("ordering-column-name", DefaultColumnsDef.OrderingColumnName),
+      timestampColumnName = config.asString("timestamp-column-name", DefaultColumnsDef.TimestampColumnName),
       tagsColumnName = config.asString("tags-column-name", DefaultColumnsDef.TagsColumnName)
     )
   }
@@ -43,5 +44,6 @@ case class JournalColumnsDefConfig(
     deletedColumnName: String,
     messageColumnName: String,
     orderingColumnName: String,
+    timestampColumnName: String,
     tagsColumnName: String
 )

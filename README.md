@@ -104,6 +104,7 @@ j5ik2o.dynamo-db-journal {
     deleted-column-name = "deleted"
     message-column-name = "message"
     ordering-column-name = "ordering"
+    timestamp-column-name = "timestamp"
     tags-column-name = "tags"
   }
   dynamo-db-client {
@@ -148,6 +149,7 @@ j5ik2o.dynamo-db-snapshot {
     deleted-column-name = "deleted"
     message-column-name = "message"
     ordering-column-name = "ordering"
+    timestamp-column-name = "timestamp"
     tags-column-name = "tags"
   }
   dynamo-db-client {
@@ -203,6 +205,7 @@ j5ik2o.dynamo-db-read-journal {
     deleted-column-name = "deleted"
     message-column-name = "message"
     ordering-column-name = "ordering"
+    timestamp-column-name = "timestamp"
     tags-column-name = "tags"
   }
   dynamo-db-client {

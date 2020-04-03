@@ -170,7 +170,9 @@ class DynamoDBReadJournal(config: Config, configPath: String)(implicit system: E
   ): Source[EventEnvelope, NotUsed] =
     currentJournalEventsByPersistenceId(persistenceId, fromSequenceNr, toSequenceNr)
       .mapConcat(adaptEvents)
-      .map(repr => new EventEnvelope(Sequence(repr.sequenceNr), repr.persistenceId, repr.sequenceNr, repr.payload, 0L))
+      .map(repr =>
+        new EventEnvelope(Sequence(repr.sequenceNr), repr.persistenceId, repr.sequenceNr, repr.payload, repr.timestamp)
+      )
       .log("currentEventsByPersistenceId")
       .withAttributes(logLevels)
 
@@ -194,7 +196,13 @@ class DynamoDBReadJournal(config: Config, configPath: String)(implicit system: E
               }
               .mapConcat(adaptEvents)
               .map(repr =>
-                new EventEnvelope(Sequence(repr.sequenceNr), repr.persistenceId, repr.sequenceNr, repr.payload, 0L)
+                new EventEnvelope(
+                  Sequence(repr.sequenceNr),
+                  repr.persistenceId,
+                  repr.sequenceNr,
+                  repr.payload,
+                  repr.timestamp
+                )
               )
               .runWith(Sink.seq).map { xs =>
                 val newFromSeqNr = nextFromSeqNr(xs)
@@ -217,7 +225,7 @@ class DynamoDBReadJournal(config: Config, configPath: String)(implicit system: E
         .mapConcat {
           case (repr, _, ordering) =>
             adaptEvents(repr).map(r =>
-              new EventEnvelope(Sequence(ordering), r.persistenceId, r.sequenceNr, r.payload, 0L)
+              new EventEnvelope(Sequence(ordering), r.persistenceId, r.sequenceNr, r.payload, r.timestamp)
             )
         }
     }

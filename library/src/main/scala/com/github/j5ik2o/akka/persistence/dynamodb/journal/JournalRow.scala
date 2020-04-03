@@ -6,6 +6,7 @@ final case class JournalRow(
     deleted: Boolean,
     message: Array[Byte],
     ordering: Long,
+    timestamp: Long,
     tags: Option[String] = None
 ) {
   def partitionKey: PartitionKey            = PartitionKey(persistenceId, sequenceNumber)

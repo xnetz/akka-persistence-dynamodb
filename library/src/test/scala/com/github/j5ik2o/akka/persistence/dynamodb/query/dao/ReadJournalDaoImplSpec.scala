@@ -84,7 +84,7 @@ class ReadJournalDaoImplSpec
   "ReadJournalDaoImpl" - {
     "allPersistenceIds" in {
       val journalRows = (1 to 100).map { n =>
-        JournalRow(PersistenceId(n.toString), SequenceNumber(1), deleted = false, "ABC".getBytes(), Long.MaxValue)
+        JournalRow(PersistenceId(n.toString), SequenceNumber(1), deleted = false, "ABC".getBytes(), Long.MaxValue, System.currentTimeMillis())
       }
       writeJournalDao.putMessages(journalRows).runWith(Sink.head).futureValue
       val result = readJournalDao
@@ -95,7 +95,7 @@ class ReadJournalDaoImplSpec
     "getMessages" in {
       val pid = "a-1"
       val journalRows = (1 to 100).map { n =>
-        JournalRow(PersistenceId(pid), SequenceNumber(n), deleted = false, "ABC".getBytes(), Long.MaxValue)
+        JournalRow(PersistenceId(pid), SequenceNumber(n), deleted = false, "ABC".getBytes(), Long.MaxValue, System.currentTimeMillis())
       }
       writeJournalDao.putMessages(journalRows).runWith(Sink.head).futureValue
       val result = readJournalDao

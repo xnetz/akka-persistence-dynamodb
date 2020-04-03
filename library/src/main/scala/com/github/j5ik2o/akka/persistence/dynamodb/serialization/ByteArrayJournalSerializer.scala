@@ -39,6 +39,7 @@ class ByteArrayJournalSerializer(serialization: Serialization, separator: String
           persistentRepr.deleted,
           _,
           System.nanoTime(),
+          System.currentTimeMillis(),
           encodeTags(tags, separator)
         )
       ) match {
@@ -50,6 +51,7 @@ class ByteArrayJournalSerializer(serialization: Serialization, separator: String
   override def deserialize(journalRow: JournalRow): Either[Throwable, (PersistentRepr, Set[String], Long)] = {
     serialization
       .deserialize(journalRow.message, classOf[PersistentRepr])
+      .map(_.withTimestamp(journalRow.timestamp))
       .map((_, decodeTags(journalRow.tags, separator), journalRow.ordering)) match {
       case Success(value) => Right(value)
       case Failure(ex)    => Left(ex)
